@@ -23,6 +23,8 @@ Install the required packages
 ## Running the Application
 Then run `python process.py`.
 
+To submit a job on a cluster read [this guide](https://nightlies.apache.org/flink/flink-docs-release-1.20/docs/deployment/cli/).
+
 ## Using Ubuntu 22
 Install Java
 ```shell
@@ -44,4 +46,10 @@ Start Flink cluster
 ```shell
 cd flink-1.20.0
 ./bin/start-cluster.sh
+```
+
+## Useful commands
+Turn 8kHz audio into 16kHz
+```shell
+ffmpeg -i audio.wav -acodec pcm_s16le -ar 16000 out2.wav
 ```
