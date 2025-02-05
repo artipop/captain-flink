@@ -30,6 +30,11 @@ Install Java
 ```shell
 sudo apt install openjdk-11-jdk
 ```
+Install Python if not installed
+```shell
+sudo apt install python
+```
+or use [PyEnv](https://github.com/pyenv/pyenv?tab=readme-ov-file#installation) to install specific Python version.
 
 Install Flink
 ```shell
