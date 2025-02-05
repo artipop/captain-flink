@@ -1,6 +1,7 @@
 import time
 from typing import Tuple
 
+import librosa
 import numpy
 import numpy as np
 import torch
@@ -50,6 +51,8 @@ class SpeechToTextMapFunction(MapFunction):
                 buffer = self.buffer_state.get()
                 numpy_arrays = [np.array(arr, dtype=np.float32) for arr in buffer]
                 np_arr = np.concatenate(numpy_arrays)
+                if self.sampling_rate != 16000:
+                    np_arr = librosa.resample(np_arr, orig_sr=self.sampling_rate, target_sr=16000)
                 self.end_collect = time.time()
                 print(f"buf {self.end_collect - self.start_collect:.6f}")
                 # print('send to whisper')
@@ -104,6 +107,8 @@ class SpeechToTextProcessFunction(KeyedProcessFunction):
                 buffer = self.buffer_state.get()
                 numpy_arrays = [np.array(arr, dtype=np.float32) for arr in buffer]
                 np_arr = np.concatenate(numpy_arrays)
+                if self.sampling_rate != 16000:
+                    np_arr = librosa.resample(np_arr, orig_sr=self.sampling_rate, target_sr=16000)
                 _ = self.whisper_model.transcribe(np_arr, new_segment_callback=print)
                 self.buffer_state_updated = False
                 self.buffer_state.clear()
