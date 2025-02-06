@@ -17,6 +17,7 @@ Install the required packages
   - for macOS using CoreML: `WHISPER_COREML=1 pip install git+https://github.com/absadiki/pywhispercpp`
   - for Nvidia GPU using CUDA: `GGML_CUDA=1 pip install git+https://github.com/absadiki/pywhispercpp`
   - general installation `pip install pywhispercpp`
+- `pip install librosa`
 - (Optional) Install dependencies for MP3 processing:
   - `pip install pydub` + ffmpeg should be installed
 
